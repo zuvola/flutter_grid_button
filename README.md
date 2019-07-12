@@ -1,8 +1,10 @@
 # flutter_grid_button
 
-Flutter widget that arrange buttons in a grid.
+Flutter widget that arrange buttons in a grid. It is useful for making a number pad, calculator, and so on.
 
-![banner](example/screenshot.png)
+[![pub package](https://img.shields.io/pub/v/flutter_grid_button.svg)](https://pub.dartlang.org/packages/flutter_grid_button)
+
+<img src="https://github.com/zuvola/flutter_grid_button/blob/master/example/screenshot.png?raw=true" width="320px"/>
 
 
 ## Getting Started

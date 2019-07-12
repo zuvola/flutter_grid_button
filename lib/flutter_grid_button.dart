@@ -55,7 +55,6 @@ class GridButton extends StatefulWidget {
 
 class _GridButtonState extends State<GridButton> {
   Widget _getButton(int row, int col) {
-    
     GridButtonItem item = widget.items[col][row];
     return Expanded(
       flex: item.flex,
