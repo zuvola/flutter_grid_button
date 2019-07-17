@@ -42,11 +42,16 @@ class GridButton extends StatefulWidget {
   /// The color to use when painting the line.
   final Color borderColor;
 
+  /// The text style to use for all buttons in the [GridButton].
+  /// [GridButtonItem.textStyle] of each item takes precedence.
+  final TextStyle textStyle;
+
   const GridButton({
     Key key,
     @required this.items,
     @required this.onPressed,
     this.borderColor,
+    this.textStyle,
   }) : super(key: key);
 
   @override
@@ -56,18 +61,20 @@ class GridButton extends StatefulWidget {
 class _GridButtonState extends State<GridButton> {
   Widget _getButton(int row, int col) {
     GridButtonItem item = widget.items[col][row];
+    TextStyle textStyle =
+        item.textStyle != null ? item.textStyle : widget.textStyle;
     return Expanded(
       flex: item.flex,
       child: FlatButton(
         key: item.key,
         color: item.color,
-        splashColor: item.textStyle?.color?.withOpacity(0.12),
+        splashColor: textStyle?.color?.withOpacity(0.12),
         onPressed: () {
           widget.onPressed(item.value != null ? item.value : item.title);
         },
         child: Text(
           item.title,
-          style: item.textStyle,
+          style: textStyle,
         ),
       ),
     );
@@ -138,6 +145,7 @@ class GridButtonItem {
   /// If non-null, the style to use for button's text.
   final TextStyle textStyle;
 
+  /// The flex factor to use for the button.
   final int flex;
 
   /// The value for the [GridButton.onPressed] callback parameter.

@@ -6,6 +6,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    const textStyle = TextStyle(fontSize: 26);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
         ),
         body: Builder(builder: (context) {
           return GridButton(
+            textStyle: textStyle,
             borderColor: Colors.black,
             onPressed: (String val) {
               Scaffold.of(context).showSnackBar(
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
                 GridButtonItem(
                     title: "Black",
                     color: Colors.black,
-                    textStyle: TextStyle(color: Colors.white)),
+                    textStyle: textStyle.copyWith(color: Colors.white)),
                 GridButtonItem(title: "Red", color: Colors.red),
               ],
               [GridButtonItem(title: "Button", value: "100")],
