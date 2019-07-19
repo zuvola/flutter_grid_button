@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
           return GridButton(
             textStyle: textStyle,
             borderColor: Colors.black,
-            onPressed: (String val) {
+            onPressed: (dynamic val) {
               Scaffold.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(val),
+                  content: Text(val.toString()),
                   duration: Duration(milliseconds: 400),
                 ),
               );
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                     textStyle: textStyle.copyWith(color: Colors.white)),
                 GridButtonItem(title: "Red", color: Colors.red),
               ],
-              [GridButtonItem(title: "Button", value: "100")],
+              [GridButtonItem(title: "Button", value: 100)],
               [
                 GridButtonItem(title: "7"),
                 GridButtonItem(title: "8"),

@@ -8,13 +8,13 @@ void main() {
     var keyB = UniqueKey();
     var value;
     var gridButton = GridButton(
-      onPressed: (String val) {
+      onPressed: (dynamic val) {
         value = val;
       },
       items: [
         [
           GridButtonItem(title: "a", key: keyA),
-          GridButtonItem(title: "b", key: keyB, value: "100"),
+          GridButtonItem(title: "b", key: keyB, value: 100),
           GridButtonItem(title: "c"),
         ],
         [GridButtonItem(title: "d")],
@@ -33,6 +33,6 @@ void main() {
     await tester.tap(find.byKey(keyA));
     expect(value, equals("a"));
     await tester.tap(find.byKey(keyB));
-    expect(value, equals("100"));
+    expect(value, equals(100));
   });
 }

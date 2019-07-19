@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 ///
 /// ```dart
 /// GridButton(
-///   onPressed: (String value) {
+///   onPressed: (dynamic value) {
 ///     /*...*/
 ///   },
 ///   items: [
@@ -37,7 +37,7 @@ class GridButton extends StatefulWidget {
   final List<List<GridButtonItem>> items;
 
   /// Called when the button is tapped or otherwise activated.
-  final ValueChanged<String> onPressed;
+  final ValueChanged<dynamic> onPressed;
 
   /// The color to use when painting the line.
   final Color borderColor;
@@ -150,7 +150,7 @@ class GridButtonItem {
 
   /// The value for the [GridButton.onPressed] callback parameter.
   /// If the [value] is null, the callback will use the [title] instead.
-  final String value;
+  final dynamic value;
 
   const GridButtonItem({
     this.key,
