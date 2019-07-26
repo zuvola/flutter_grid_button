@@ -1,3 +1,6 @@
+## [1.1.2]
+- Added `GridButton.textDirection`.
+
 ## [1.1.1]
 - Changed `GridButton.onPressed` parameter to `dynamic`.
 

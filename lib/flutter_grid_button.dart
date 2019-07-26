@@ -46,12 +46,16 @@ class GridButton extends StatefulWidget {
   /// [GridButtonItem.textStyle] of each item takes precedence.
   final TextStyle textStyle;
 
+  /// Determine the layout order
+  final TextDirection textDirection;
+
   const GridButton({
     Key key,
     @required this.items,
     @required this.onPressed,
     this.borderColor,
     this.textStyle,
+    this.textDirection,
   }) : super(key: key);
 
   @override
@@ -107,6 +111,7 @@ class _GridButtonState extends State<GridButton> {
       }
       list[i] = Expanded(
         child: Row(
+          textDirection: widget.textDirection,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: _getRows(i ~/ 2),
         ),
