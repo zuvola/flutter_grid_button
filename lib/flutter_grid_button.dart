@@ -42,6 +42,9 @@ class GridButton extends StatefulWidget {
   /// The color to use when painting the line.
   final Color borderColor;
 
+  /// Width of the divider border, which is usually 1.0.
+  final double borderWidth;
+
   /// The text style to use for all buttons in the [GridButton].
   /// [GridButtonItem.textStyle] of each item takes precedence.
   final TextStyle textStyle;
@@ -56,6 +59,7 @@ class GridButton extends StatefulWidget {
     this.borderColor,
     this.textStyle,
     this.textDirection,
+    this.borderWidth = 1.0,
   }) : super(key: key);
 
   @override
@@ -63,57 +67,53 @@ class GridButton extends StatefulWidget {
 }
 
 class _GridButtonState extends State<GridButton> {
+  BorderSide _borderSide;
+
   Widget _getButton(int row, int col) {
     GridButtonItem item = widget.items[col][row];
     TextStyle textStyle =
         item.textStyle != null ? item.textStyle : widget.textStyle;
     return Expanded(
       flex: item.flex,
-      child: FlatButton(
-        key: item.key,
-        color: item.color,
-        splashColor: textStyle?.color?.withOpacity(0.12),
-        onPressed: () {
-          widget.onPressed(item.value != null ? item.value : item.title);
-        },
-        child: Text(
-          item.title,
-          style: textStyle,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: _borderSide,
+            right: _borderSide,
+          ),
+        ),
+        child: FlatButton(
+          key: item.key,
+          color: item.color,
+          splashColor: textStyle?.color?.withOpacity(0.12),
+          onPressed: () {
+            widget.onPressed(item.value != null ? item.value : item.title);
+          },
+          child: Text(
+            item.title,
+            style: textStyle,
+          ),
         ),
       ),
     );
   }
 
   List<Widget> _getRows(int col) {
-    List<Widget> list = List(widget.items[col].length * 2);
+    List<Widget> list = List(widget.items[col].length);
     for (int i = 0; i < list.length; i++) {
-      if (i % 2 == 1) {
-        list[i] = VerticalDivider(
-          width: 1,
-          color: widget.borderColor,
-        );
-        continue;
-      }
-      list[i] = _getButton(i ~/ 2, col);
+      list[i] = _getButton(i, col);
     }
     return list;
   }
 
   List<Widget> _getCols() {
-    List<Widget> list = List(widget.items.length * 2);
+    List<Widget> list = List(widget.items.length);
     for (int i = 0; i < list.length; i++) {
-      if (i % 2 == 1) {
-        list[i] = Divider(
-          height: 1,
-          color: widget.borderColor,
-        );
-        continue;
-      }
       list[i] = Expanded(
         child: Row(
           textDirection: widget.textDirection,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: _getRows(i ~/ 2),
+          children: _getRows(i),
         ),
       );
     }
@@ -122,11 +122,13 @@ class _GridButtonState extends State<GridButton> {
 
   @override
   Widget build(BuildContext context) {
+    _borderSide = Divider.createBorderSide(context,
+        color: widget.borderColor, width: widget.borderWidth);
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          top: Divider.createBorderSide(context, color: widget.borderColor),
-          left: Divider.createBorderSide(context, color: widget.borderColor),
+          top: _borderSide,
+          left: _borderSide,
         ),
       ),
       child: Column(
