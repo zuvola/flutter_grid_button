@@ -45,6 +45,9 @@ class GridButton extends StatefulWidget {
   /// Width of the divider border, which is usually 1.0.
   final double borderWidth;
 
+  /// Whether to show surrounding borders.
+  final bool hideSurroundingBorder;
+
   /// The text style to use for all buttons in the [GridButton].
   /// [GridButtonItem.textStyle] of each item takes precedence.
   final TextStyle textStyle;
@@ -60,6 +63,7 @@ class GridButton extends StatefulWidget {
     this.textStyle,
     this.textDirection,
     this.borderWidth = 1.0,
+    this.hideSurroundingBorder = false,
   }) : super(key: key);
 
   @override
@@ -73,13 +77,17 @@ class _GridButtonState extends State<GridButton> {
     GridButtonItem item = widget.items[col][row];
     TextStyle textStyle =
         item.textStyle != null ? item.textStyle : widget.textStyle;
+    var noBottomLine =
+        widget.hideSurroundingBorder && widget.items.length == col + 1;
+    var noRightLine =
+        widget.hideSurroundingBorder && widget.items[col].length == row + 1;
     return Expanded(
       flex: item.flex,
       child: Container(
         decoration: BoxDecoration(
           border: Border(
-            bottom: _borderSide,
-            right: _borderSide,
+            bottom: noBottomLine ? BorderSide.none : _borderSide,
+            right: noRightLine ? BorderSide.none : _borderSide,
           ),
         ),
         child: FlatButton(
@@ -125,12 +133,14 @@ class _GridButtonState extends State<GridButton> {
     _borderSide = Divider.createBorderSide(context,
         color: widget.borderColor, width: widget.borderWidth);
     return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          top: _borderSide,
-          left: _borderSide,
-        ),
-      ),
+      decoration: widget.hideSurroundingBorder
+          ? null
+          : BoxDecoration(
+              border: Border(
+                top: _borderSide,
+                left: _borderSide,
+              ),
+            ),
       child: Column(
         children: _getCols(),
       ),
