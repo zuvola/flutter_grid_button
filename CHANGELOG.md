@@ -1,3 +1,6 @@
+## [1.1.5]
+- Fixed a bug with `GridButton.borderWidth`.
+
 ## [1.1.4]
 - Added `GridButton.hideSurroundingBorder`.
 

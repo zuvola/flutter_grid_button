@@ -131,7 +131,7 @@ class _GridButtonState extends State<GridButton> {
   @override
   Widget build(BuildContext context) {
     _borderSide = Divider.createBorderSide(context,
-        color: widget.borderColor, width: widget.borderWidth);
+        color: widget.borderColor, width: widget.borderWidth ?? 1.0);
     return Container(
       decoration: widget.hideSurroundingBorder
           ? null
