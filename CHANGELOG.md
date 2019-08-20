@@ -1,3 +1,6 @@
+## [1.1.6]
+- Added `GridButtonItem.borderRadius`.
+
 ## [1.1.5]
 - Fixed a bug with `GridButton.borderWidth`.
 

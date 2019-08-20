@@ -1,6 +1,6 @@
 name: flutter_grid_button
 description: Flutter widget that arrange buttons in a grid. It is useful for making a number pad, calculator, and so on.
-version: 1.1.5
+version: 1.1.6
 author: zuvola <zuvola@gmail.com>
 homepage: https://github.com/zuvola/flutter_grid_button
 

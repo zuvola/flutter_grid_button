@@ -94,6 +94,9 @@ class _GridButtonState extends State<GridButton> {
           key: item.key,
           color: item.color,
           splashColor: textStyle?.color?.withOpacity(0.12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(item.borderRadius),
+          ),
           onPressed: () {
             widget.onPressed(item.value != null ? item.value : item.title);
           },
@@ -169,6 +172,9 @@ class GridButtonItem {
   /// If the [value] is null, the callback will use the [title] instead.
   final dynamic value;
 
+  /// The corner radius of the button.
+  final double borderRadius;
+
   const GridButtonItem({
     this.key,
     this.title,
@@ -176,5 +182,6 @@ class GridButtonItem {
     this.textStyle,
     this.value,
     this.flex = 1,
+    this.borderRadius = 0,
   });
 }

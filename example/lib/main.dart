@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
             padding: const EdgeInsets.all(18.0),
             child: GridButton(
               textStyle: textStyle,
-              borderColor: Colors.grey,
+              borderColor: Colors.grey[300],
               borderWidth: 2,
               onPressed: (dynamic val) {
                 Scaffold.of(context).showSnackBar(
@@ -35,7 +35,13 @@ class MyApp extends StatelessWidget {
                       textStyle: textStyle.copyWith(color: Colors.white)),
                   GridButtonItem(title: "Red", color: Colors.red),
                 ],
-                [GridButtonItem(title: "Button", value: 100)],
+                [
+                  GridButtonItem(
+                      title: "Button",
+                      value: 100,
+                      color: Colors.blue,
+                      borderRadius: 30)
+                ],
                 [
                   GridButtonItem(title: "7"),
                   GridButtonItem(title: "8"),
