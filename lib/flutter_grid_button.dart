@@ -100,6 +100,10 @@ class _GridButtonState extends State<GridButton> {
           onPressed: () {
             widget.onPressed(item.value != null ? item.value : item.title);
           },
+          onLongPress: (){
+            var result = item.longPressValue ?? item.value;
+            widget.onPressed(result != null ? result : item.title);            
+          },
           child: Text(
             item.title,
             style: textStyle,
@@ -172,6 +176,12 @@ class GridButtonItem {
   /// If the [value] is null, the callback will use the [title] instead.
   final dynamic value;
 
+  /// The value for the [GridButton.onLongPressed] callback parameter.
+  /// If the [longPressValue] is null, the callback will fallback to 
+  // the [value] set for [GridButton.onPressed] if [value] is null 
+  // the callback will use the [title] instead.  
+
+
   /// The corner radius of the button.
   final double borderRadius;
 
@@ -181,6 +191,7 @@ class GridButtonItem {
     this.color,
     this.textStyle,
     this.value,
+    this.longPressValue,
     this.flex = 1,
     this.borderRadius = 0,
   });
