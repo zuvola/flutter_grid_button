@@ -180,6 +180,7 @@ class GridButtonItem {
   /// If the [longPressValue] is null, the callback will fallback to 
   // the [value] set for [GridButton.onPressed] if [value] is null 
   // the callback will use the [title] instead.  
+  final dynamic longPressValue;
 
 
   /// The corner radius of the button.
