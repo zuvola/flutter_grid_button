@@ -55,6 +55,9 @@ class GridButton extends StatefulWidget {
   /// Determine the layout order
   final TextDirection textDirection;
 
+  /// ui control disabled
+  final bool enabled;
+
   const GridButton({
     Key key,
     @required this.items,
@@ -64,6 +67,7 @@ class GridButton extends StatefulWidget {
     this.textDirection,
     this.borderWidth = 1.0,
     this.hideSurroundingBorder = false,
+    this.enabled = true
   }) : super(key: key);
 
   @override
@@ -97,13 +101,13 @@ class _GridButtonState extends State<GridButton> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(item.borderRadius),
           ),
-          onPressed: () {
+          onPressed: (widget.enabled == true) ? () {
             widget.onPressed(item.value != null ? item.value : item.title);
-          },
-          onLongPress: (){
+          } : null,
+          onLongPress: (widget.enabled == true) ? (){
             var result = item.longPressValue ?? item.value;
-            widget.onPressed(result != null ? result : item.title);            
-          },
+            widget.onPressed(result != null ? result : item.title);
+          }: null,
           child: Text(
             item.title,
             style: textStyle,
@@ -178,8 +182,8 @@ class GridButtonItem {
 
   /// The value for the [GridButton.onLongPressed] callback parameter.
   /// If the [longPressValue] is null, the callback will fallback to 
-  // the [value] set for [GridButton.onPressed] if [value] is null 
-  // the callback will use the [title] instead.  
+  /// the [value] set for [GridButton.onPressed] if [value] is null 
+  /// the callback will use the [title] instead.
   final dynamic longPressValue;
 
 
