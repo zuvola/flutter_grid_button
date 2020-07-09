@@ -37,7 +37,7 @@ GridButton(
       GridButtonItem(title: "3", flex: 2),
     ],
     [
-      GridButtonItem(title: "a", value: "100"),
+      GridButtonItem(title: "a", value: "100", longPressValue: "long"),
       GridButtonItem(title: "b", color: Colors.lightBlue)
     ],
   ],

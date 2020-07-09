@@ -23,7 +23,7 @@ import 'package:flutter/material.dart';
 ///       GridButtonItem(title: "3"),
 ///     ],
 ///     [
-///       GridButtonItem(title: "a", value: "100"),
+///       GridButtonItem(title: "a", value: "100", longPressValue: "long"),
 ///       GridButtonItem(title: "b", color: Colors.lightBlue)
 ///     ],
 ///   ],
@@ -58,17 +58,17 @@ class GridButton extends StatefulWidget {
   /// ui control disabled
   final bool enabled;
 
-  const GridButton({
-    Key key,
-    @required this.items,
-    @required this.onPressed,
-    this.borderColor,
-    this.textStyle,
-    this.textDirection,
-    this.borderWidth = 1.0,
-    this.hideSurroundingBorder = false,
-    this.enabled = true
-  }) : super(key: key);
+  const GridButton(
+      {Key key,
+      @required this.items,
+      @required this.onPressed,
+      this.borderColor,
+      this.textStyle,
+      this.textDirection,
+      this.borderWidth = 1.0,
+      this.hideSurroundingBorder = false,
+      this.enabled = true})
+      : super(key: key);
 
   @override
   _GridButtonState createState() => _GridButtonState();
@@ -101,13 +101,18 @@ class _GridButtonState extends State<GridButton> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(item.borderRadius),
           ),
-          onPressed: (widget.enabled == true) ? () {
-            widget.onPressed(item.value != null ? item.value : item.title);
-          } : null,
-          onLongPress: (widget.enabled == true) ? (){
-            var result = item.longPressValue ?? item.value;
-            widget.onPressed(result != null ? result : item.title);
-          }: null,
+          onPressed: (widget.enabled == true)
+              ? () {
+                  widget
+                      .onPressed(item.value != null ? item.value : item.title);
+                }
+              : null,
+          onLongPress: (widget.enabled == true)
+              ? () {
+                  var result = item.longPressValue ?? item.value;
+                  widget.onPressed(result != null ? result : item.title);
+                }
+              : null,
           child: Text(
             item.title,
             style: textStyle,
@@ -180,12 +185,11 @@ class GridButtonItem {
   /// If the [value] is null, the callback will use the [title] instead.
   final dynamic value;
 
-  /// The value for the [GridButton.onLongPressed] callback parameter.
-  /// If the [longPressValue] is null, the callback will fallback to 
-  /// the [value] set for [GridButton.onPressed] if [value] is null 
+  /// The value for the [GridButton.onPressed] callback parameter.
+  /// If the [longPressValue] is null, the callback will fallback to
+  /// the [value] set for [GridButton.onPressed] if [value] is null
   /// the callback will use the [title] instead.
   final dynamic longPressValue;
-
 
   /// The corner radius of the button.
   final double borderRadius;

@@ -1,3 +1,6 @@
+## [1.1.7]
+- Added `GridButtonItem.longPressValue` & `GridButton.enabled`.
+
 ## [1.1.6]
 - Added `GridButtonItem.borderRadius`.
 

@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
                 ],
                 [
                   GridButtonItem(title: "0"),
-                  GridButtonItem(title: "000", flex: 2,longPressValue: 400),
+                  GridButtonItem(title: "000", flex: 2, longPressValue: 400),
                   GridButtonItem(title: "=", color: Colors.grey[300]),
                 ],
               ],
