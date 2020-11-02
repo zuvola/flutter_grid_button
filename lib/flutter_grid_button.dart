@@ -19,8 +19,8 @@ import 'package:flutter/material.dart';
 ///   items: [
 ///     [
 ///       GridButtonItem(title: "1"),
-///       GridButtonItem(title: "2"),
-///       GridButtonItem(title: "3"),
+///       GridButtonItem(child: Text("2")),
+///       GridButtonItem(title: "3", flex: 2),
 ///     ],
 ///     [
 ///       GridButtonItem(title: "a", value: "100", longPressValue: "long"),
@@ -113,10 +113,12 @@ class _GridButtonState extends State<GridButton> {
                   widget.onPressed(result != null ? result : item.title);
                 }
               : null,
-          child: Text(
-            item.title,
-            style: textStyle,
-          ),
+          child: item.child == null
+              ? Text(
+                  item.title,
+                  style: textStyle,
+                )
+              : item.child,
         ),
       ),
     );
@@ -172,6 +174,9 @@ class GridButtonItem {
   /// The button's fill color.
   final Color color;
 
+  /// The button's label.
+  final Widget child;
+
   /// The text to display on the button.
   final String title;
 
@@ -203,5 +208,6 @@ class GridButtonItem {
     this.longPressValue,
     this.flex = 1,
     this.borderRadius = 0,
+    this.child,
   });
 }

@@ -37,8 +37,11 @@ class MyApp extends StatelessWidget {
                 ],
                 [
                   GridButtonItem(
-                      title: "Button",
-                      value: 100,
+                      child: Icon(
+                        Icons.image_outlined,
+                        size: 50,
+                      ),
+                      value: 'image',
                       color: Colors.blue,
                       borderRadius: 30)
                 ],

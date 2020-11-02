@@ -33,7 +33,7 @@ GridButton(
   items: [
     [
       GridButtonItem(title: "1"),
-      GridButtonItem(title: "2"),
+      GridButtonItem(child: Text("2")),
       GridButtonItem(title: "3", flex: 2),
     ],
     [

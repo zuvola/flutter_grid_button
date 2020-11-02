@@ -1,3 +1,6 @@
+## [1.1.8]
+- Added `GridButtonItem.child`.
+
 ## [1.1.7]
 - Added `GridButtonItem.longPressValue` & `GridButton.enabled`.
 
