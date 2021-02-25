@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
               borderColor: Colors.grey[300],
               borderWidth: 2,
               onPressed: (dynamic val) {
-                Scaffold.of(context).showSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(val.toString()),
                     duration: Duration(milliseconds: 400),
