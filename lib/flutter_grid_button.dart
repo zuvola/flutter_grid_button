@@ -94,12 +94,15 @@ class _GridButtonState extends State<GridButton> {
             right: noRightLine ? BorderSide.none : _borderSide,
           ),
         ),
-        child: FlatButton(
+        child: TextButton(
           key: item.key,
-          color: item.color,
-          splashColor: textStyle?.color?.withOpacity(0.12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(item.borderRadius),
+          style: TextButton.styleFrom(
+            primary: textStyle?.color,
+            backgroundColor: item.color,
+            textStyle: textStyle,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(item.borderRadius),
+            ),
           ),
           onPressed: (widget.enabled == true)
               ? () {

@@ -30,10 +30,15 @@ class MyApp extends StatelessWidget {
               items: [
                 [
                   GridButtonItem(
-                      title: "Black",
-                      color: Colors.black,
-                      textStyle: textStyle.copyWith(color: Colors.white)),
-                  GridButtonItem(title: "Red", color: Colors.red),
+                    title: "Black",
+                    color: Colors.black,
+                    textStyle: textStyle.copyWith(color: Colors.white),
+                  ),
+                  GridButtonItem(
+                    title: "Red",
+                    color: Colors.red,
+                    textStyle: textStyle.copyWith(color: Colors.white),
+                  ),
                 ],
                 [
                   GridButtonItem(
@@ -41,6 +46,7 @@ class MyApp extends StatelessWidget {
                         Icons.image_outlined,
                         size: 50,
                       ),
+                      textStyle: textStyle.copyWith(color: Colors.white),
                       value: 'image',
                       color: Colors.blue,
                       borderRadius: 30)
