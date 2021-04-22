@@ -1,3 +1,12 @@
+## [2.0.0-nullsafety.1]
+ - Replaced FlatButton with TextButton.
+
+## [2.0.0-nullsafety.0+1]
+ - Change the Dart SDK constraint.
+
+## [2.0.0-nullsafety.0]
+ - Null safety migration
+
 ## [1.1.8]
 - Added `GridButtonItem.child`.
 

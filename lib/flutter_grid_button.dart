@@ -40,7 +40,7 @@ class GridButton extends StatefulWidget {
   final ValueChanged<dynamic> onPressed;
 
   /// The color to use when painting the line.
-  final Color borderColor;
+  final Color? borderColor;
 
   /// Width of the divider border, which is usually 1.0.
   final double borderWidth;
@@ -50,18 +50,18 @@ class GridButton extends StatefulWidget {
 
   /// The text style to use for all buttons in the [GridButton].
   /// [GridButtonItem.textStyle] of each item takes precedence.
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   /// Determine the layout order
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   /// ui control disabled
   final bool enabled;
 
   const GridButton(
-      {Key key,
-      @required this.items,
-      @required this.onPressed,
+      {Key? key,
+      required this.items,
+      required this.onPressed,
       this.borderColor,
       this.textStyle,
       this.textDirection,
@@ -75,11 +75,11 @@ class GridButton extends StatefulWidget {
 }
 
 class _GridButtonState extends State<GridButton> {
-  BorderSide _borderSide;
+  late BorderSide _borderSide;
 
   Widget _getButton(int row, int col) {
     GridButtonItem item = widget.items[col][row];
-    TextStyle textStyle =
+    TextStyle? textStyle =
         item.textStyle != null ? item.textStyle : widget.textStyle;
     var noBottomLine =
         widget.hideSurroundingBorder && widget.items.length == col + 1;
@@ -94,13 +94,16 @@ class _GridButtonState extends State<GridButton> {
             right: noRightLine ? BorderSide.none : _borderSide,
           ),
         ),
-        child: FlatButton(
+        child: TextButton(
           key: item.key,
-          color: item.color,
-          splashColor: textStyle?.color?.withOpacity(0.12),
-          shape: RoundedRectangleBorder(
-            side: item.shape ?? BorderSide.none,
-            borderRadius: BorderRadius.circular(item.borderRadius),
+          style: TextButton.styleFrom(
+            primary: textStyle?.color,
+            backgroundColor: item.color,
+            textStyle: textStyle,
+            shape: RoundedRectangleBorder(
+              side: item.shape ?? BorderSide.none,
+              borderRadius: BorderRadius.circular(item.borderRadius),
+            ),
           ),
           onPressed: (widget.enabled == true)
               ? () {
@@ -116,41 +119,34 @@ class _GridButtonState extends State<GridButton> {
               : null,
           child: item.child == null
               ? Text(
-                  item.title,
+                  item.title!,
                   style: textStyle,
                 )
-              : item.child,
+              : item.child!,
         ),
       ),
     );
   }
 
-  List<Widget> _getRows(int col) {
-    List<Widget> list = List(widget.items[col].length);
-    for (int i = 0; i < list.length; i++) {
-      list[i] = _getButton(i, col);
-    }
-    return list;
-  }
+  List<Widget> _getRows(int col) => [
+        for (int i = 0; i < widget.items[col].length; i++) _getButton(i, col),
+      ];
 
-  List<Widget> _getCols() {
-    List<Widget> list = List(widget.items.length);
-    for (int i = 0; i < list.length; i++) {
-      list[i] = Expanded(
-        child: Row(
-          textDirection: widget.textDirection,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: _getRows(i),
-        ),
-      );
-    }
-    return list;
-  }
+  List<Widget> _getCols() => [
+        for (int i = 0; i < widget.items.length; i++)
+          Expanded(
+            child: Row(
+              textDirection: widget.textDirection,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: _getRows(i),
+            ),
+          )
+      ];
 
   @override
   Widget build(BuildContext context) {
     _borderSide = Divider.createBorderSide(context,
-        color: widget.borderColor, width: widget.borderWidth ?? 1.0);
+        color: widget.borderColor, width: widget.borderWidth);
     return Container(
       decoration: widget.hideSurroundingBorder
           ? null
@@ -170,19 +166,19 @@ class _GridButtonState extends State<GridButton> {
 /// The data for a cell of a [GridButton].
 class GridButtonItem {
   /// The [key] for the button.
-  final Key key;
+  final Key? key;
 
   /// The button's fill color.
-  final Color color;
+  final Color? color;
 
   /// The button's label.
-  final Widget child;
+  final Widget? child;
 
   /// The text to display on the button.
-  final String title;
+  final String? title;
 
   /// If non-null, the style to use for button's text.
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   /// The flex factor to use for the button.
   final int flex;
@@ -201,7 +197,7 @@ class GridButtonItem {
   final double borderRadius;
 
   // border settings
-  final BorderSide shape;
+  final BorderSide? shape;
 
   const GridButtonItem({
     this.key,
