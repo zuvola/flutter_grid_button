@@ -99,6 +99,7 @@ class _GridButtonState extends State<GridButton> {
           color: item.color,
           splashColor: textStyle?.color?.withOpacity(0.12),
           shape: RoundedRectangleBorder(
+            side: item.shape ?? BorderSide.none,
             borderRadius: BorderRadius.circular(item.borderRadius),
           ),
           onPressed: (widget.enabled == true)
@@ -199,6 +200,9 @@ class GridButtonItem {
   /// The corner radius of the button.
   final double borderRadius;
 
+  // border settings
+  final BorderSide shape;
+
   const GridButtonItem({
     this.key,
     this.title,
@@ -209,5 +213,6 @@ class GridButtonItem {
     this.flex = 1,
     this.borderRadius = 0,
     this.child,
+    this.shape,
   });
 }
