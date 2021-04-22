@@ -1,3 +1,6 @@
+## [2.0.0]
+- Added `GridButtonItem.shape`.
+
 ## [2.0.0-nullsafety.1]
  - Replaced FlatButton with TextButton.
 

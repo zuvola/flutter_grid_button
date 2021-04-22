@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
                       textStyle: textStyle.copyWith(color: Colors.white),
                       value: 'image',
                       color: Colors.blue,
+                      shape: BorderSide(width: 4),
                       borderRadius: 30)
                 ],
                 [
