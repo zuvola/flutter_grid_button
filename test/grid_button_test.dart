@@ -6,7 +6,7 @@ void main() {
   testWidgets('widget test', (WidgetTester tester) async {
     var keyA = UniqueKey();
     var keyB = UniqueKey();
-    var value = 0;
+    dynamic value;
     var gridButton = GridButton(
       onPressed: (dynamic val) {
         value = val;
