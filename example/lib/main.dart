@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grid_button/flutter_grid_button.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     const textStyle = TextStyle(fontSize: 26);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('GridButton'),
+          title: const Text('GridButton'),
         ),
         body: Builder(builder: (context) {
           return Padding(
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(val.toString()),
-                    duration: Duration(milliseconds: 400),
+                    duration: const Duration(milliseconds: 400),
                   ),
                 );
               },
@@ -42,37 +44,38 @@ class MyApp extends StatelessWidget {
                 ],
                 [
                   GridButtonItem(
-                      child: Icon(
+                      child: const Icon(
                         Icons.image_outlined,
                         size: 50,
                       ),
                       textStyle: textStyle.copyWith(color: Colors.white),
                       value: 'image',
                       color: Colors.blue,
-                      shape: BorderSide(width: 4),
+                      shape: const BorderSide(width: 4),
                       borderRadius: 30)
                 ],
                 [
-                  GridButtonItem(title: "7"),
-                  GridButtonItem(title: "8"),
-                  GridButtonItem(title: "9"),
+                  const GridButtonItem(title: "7"),
+                  const GridButtonItem(title: "8"),
+                  const GridButtonItem(title: "9"),
                   GridButtonItem(title: "×", color: Colors.grey[300]),
                 ],
                 [
-                  GridButtonItem(title: "4"),
-                  GridButtonItem(title: "5"),
-                  GridButtonItem(title: "6"),
+                  const GridButtonItem(title: "4"),
+                  const GridButtonItem(title: "5"),
+                  const GridButtonItem(title: "6"),
                   GridButtonItem(title: "-", color: Colors.grey[300]),
                 ],
                 [
-                  GridButtonItem(title: "1"),
-                  GridButtonItem(title: "2"),
-                  GridButtonItem(title: "3"),
+                  const GridButtonItem(title: "1"),
+                  const GridButtonItem(title: "2"),
+                  const GridButtonItem(title: "3"),
                   GridButtonItem(title: "+", color: Colors.grey[300]),
                 ],
                 [
-                  GridButtonItem(title: "0"),
-                  GridButtonItem(title: "000", flex: 2, longPressValue: 400),
+                  const GridButtonItem(title: "0"),
+                  const GridButtonItem(
+                      title: "000", flex: 2, longPressValue: 400),
                   GridButtonItem(title: "=", color: Colors.grey[300]),
                 ],
               ],

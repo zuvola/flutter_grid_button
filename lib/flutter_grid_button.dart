@@ -79,8 +79,7 @@ class _GridButtonState extends State<GridButton> {
 
   Widget _getButton(int row, int col) {
     GridButtonItem item = widget.items[col][row];
-    TextStyle? textStyle =
-        item.textStyle != null ? item.textStyle : widget.textStyle;
+    TextStyle? textStyle = item.textStyle ?? widget.textStyle;
     var noBottomLine =
         widget.hideSurroundingBorder && widget.items.length == col + 1;
     var noRightLine =
@@ -107,14 +106,13 @@ class _GridButtonState extends State<GridButton> {
           ),
           onPressed: (widget.enabled == true)
               ? () {
-                  widget
-                      .onPressed(item.value != null ? item.value : item.title);
+                  widget.onPressed(item.value ?? item.title);
                 }
               : null,
           onLongPress: (widget.enabled == true)
               ? () {
                   var result = item.longPressValue ?? item.value;
-                  widget.onPressed(result != null ? result : item.title);
+                  widget.onPressed(result ?? item.title);
                 }
               : null,
           child: item.child == null
@@ -196,7 +194,7 @@ class GridButtonItem {
   /// The corner radius of the button.
   final double borderRadius;
 
-  // border settings
+  /// border settings
   final BorderSide? shape;
 
   const GridButtonItem({

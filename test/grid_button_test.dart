@@ -6,7 +6,7 @@ void main() {
   testWidgets('widget test', (WidgetTester tester) async {
     var keyA = UniqueKey();
     var keyB = UniqueKey();
-    var value;
+    var value = 0;
     var gridButton = GridButton(
       onPressed: (dynamic val) {
         value = val;
@@ -15,10 +15,10 @@ void main() {
         [
           GridButtonItem(title: "a", key: keyA),
           GridButtonItem(title: "b", key: keyB, value: 100),
-          GridButtonItem(title: "c"),
+          const GridButtonItem(title: "c"),
         ],
-        [GridButtonItem(title: "d")],
-        [
+        const [GridButtonItem(title: "d")],
+        const [
           GridButtonItem(title: "e"),
           GridButtonItem(title: "f"),
           GridButtonItem(title: "g"),
