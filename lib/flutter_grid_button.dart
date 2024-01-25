@@ -197,6 +197,9 @@ class GridButtonItem {
   /// border settings
   final BorderSide? shape;
 
+  /// An optional focus node to use as the focus node for this item.
+  final FocusNode? focusNode;
+
   const GridButtonItem({
     this.key,
     this.title,
@@ -208,5 +211,6 @@ class GridButtonItem {
     this.borderRadius = 0,
     this.child,
     this.shape,
+    this.focusNode,
   });
 }

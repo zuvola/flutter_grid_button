@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grid_button/flutter_grid_button.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final _focusNode = FocusNode(canRequestFocus: false, skipTraversal: true);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
               borderColor: Colors.grey[300],
               borderWidth: 2,
               onPressed: (dynamic val) {
+                _focusNode.requestFocus();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(val.toString()),
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {
                         Icons.image_outlined,
                         size: 50,
                       ),
+                      focusNode: _focusNode,
                       textStyle: textStyle.copyWith(color: Colors.white),
                       value: 'image',
                       color: Colors.blue,
