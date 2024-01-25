@@ -95,8 +95,9 @@ class _GridButtonState extends State<GridButton> {
         ),
         child: TextButton(
           key: item.key,
+          focusNode: item.focusNode,
           style: TextButton.styleFrom(
-            primary: textStyle?.color,
+            foregroundColor: textStyle?.color,
             backgroundColor: item.color,
             textStyle: textStyle,
             shape: RoundedRectangleBorder(

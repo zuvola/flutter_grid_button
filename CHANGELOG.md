@@ -1,3 +1,6 @@
+## [2.1.0]
+- Added `GridButtonItem.focusNode`.
+
 ## [2.0.0]
 - Added `GridButtonItem.shape`.
 
