@@ -22,7 +22,11 @@ class MyApp extends StatelessWidget {
               textStyle: textStyle,
               borderColor: Colors.grey[300],
               borderWidth: 2,
+              onTapDown: (value) {
+                debugPrint("onTapDown: $value");
+              },
               onPressed: (dynamic val) {
+                debugPrint("onPressed: $val");
                 _focusNode.requestFocus();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(

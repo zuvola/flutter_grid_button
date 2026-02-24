@@ -39,6 +39,9 @@ class GridButton extends StatefulWidget {
   /// Called when the button is tapped or otherwise activated.
   final ValueChanged<dynamic> onPressed;
 
+  /// Called when the button is tapped down.
+  final ValueChanged<dynamic>? onTapDown;
+
   /// The color to use when painting the line.
   final Color? borderColor;
 
@@ -62,6 +65,7 @@ class GridButton extends StatefulWidget {
       {Key? key,
       required this.items,
       required this.onPressed,
+      this.onTapDown,
       this.borderColor,
       this.textStyle,
       this.textDirection,
@@ -93,35 +97,45 @@ class _GridButtonState extends State<GridButton> {
             right: noRightLine ? BorderSide.none : _borderSide,
           ),
         ),
-        child: TextButton(
-          key: item.key,
-          focusNode: item.focusNode,
-          style: TextButton.styleFrom(
-            foregroundColor: textStyle?.color,
-            backgroundColor: item.color,
-            textStyle: textStyle,
-            shape: RoundedRectangleBorder(
-              side: item.shape ?? BorderSide.none,
-              borderRadius: BorderRadius.circular(item.borderRadius),
+        child: Material(
+          color: item.color ?? Colors.transparent,
+          borderRadius: BorderRadius.circular(item.borderRadius),
+          child: InkWell(
+            key: item.key,
+            focusNode: item.focusNode,
+            borderRadius: BorderRadius.circular(item.borderRadius),
+            onTapDown: (widget.enabled == true && widget.onTapDown != null)
+                ? (details) {
+                    widget.onTapDown!(item.value ?? item.title);
+                  }
+                : null,
+            onTap: (widget.enabled == true)
+                ? () {
+                    widget.onPressed(item.value ?? item.title);
+                  }
+                : null,
+            onLongPress: (widget.enabled == true)
+                ? () {
+                    var result = item.longPressValue ?? item.value;
+                    widget.onPressed(result ?? item.title);
+                  }
+                : null,
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: item.shape != null
+                    ? Border.fromBorderSide(item.shape!)
+                    : null,
+                borderRadius: BorderRadius.circular(item.borderRadius),
+              ),
+              child: item.child == null
+                  ? Text(
+                      item.title!,
+                      style: textStyle,
+                    )
+                  : item.child!,
             ),
           ),
-          onPressed: (widget.enabled == true)
-              ? () {
-                  widget.onPressed(item.value ?? item.title);
-                }
-              : null,
-          onLongPress: (widget.enabled == true)
-              ? () {
-                  var result = item.longPressValue ?? item.value;
-                  widget.onPressed(result ?? item.title);
-                }
-              : null,
-          child: item.child == null
-              ? Text(
-                  item.title!,
-                  style: textStyle,
-                )
-              : item.child!,
         ),
       ),
     );

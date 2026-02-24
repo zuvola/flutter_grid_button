@@ -1,3 +1,6 @@
+## [2.2.0]
+- Added `GridButton.onTapDown` callback.
+
 ## [2.1.0]
 - Added `GridButtonItem.focusNode`.
 
