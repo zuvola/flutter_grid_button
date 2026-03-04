@@ -114,7 +114,10 @@ class _GridButtonState extends State<GridButton> {
             onPointerDown:
                 (widget.enabled == true && widget.onPointerDown != null)
                     ? (event) {
-                        widget.onPointerDown!(item.value ?? item.title);
+                        // Only respond to left click (primary mouse button: buttons == 1)
+                        if (event.buttons == 1) {
+                          widget.onPointerDown!(item.value ?? item.title);
+                        }
                       }
                     : null,
             child: InkWell(

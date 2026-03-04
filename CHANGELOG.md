@@ -1,3 +1,6 @@
+## [2.3.1]
+- Fixed onPointerDown being called even when right-clicking.
+
 ## [2.3.0]
 - Added `GridButton.onPointerDown` callback.
 
