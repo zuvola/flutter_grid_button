@@ -37,10 +37,19 @@ class GridButton extends StatefulWidget {
   final List<List<GridButtonItem>> items;
 
   /// Called when the button is tapped or otherwise activated.
+  /// This is triggered when the tap is released (tap up event).
+  /// This follows Flutter's gesture system and respects gesture disambiguation.
   final ValueChanged<dynamic> onPressed;
 
-  /// Called when the button is tapped down.
+  /// Called when a pointer that might cause a tap has contacted the screen at a particular location.
+  /// This is triggered during the tap down phase, before gesture recognition is complete.
+  /// This follows Flutter's gesture system and respects gesture disambiguation.
   final ValueChanged<dynamic>? onTapDown;
+
+  /// Called when a pointer has contacted the screen at a particular location.
+  /// This is the most low-level touch event, triggered immediately when the pointer touches the screen,
+  /// before any gesture recognition occurs. Unlike onTapDown, this bypasses gesture disambiguation.
+  final ValueChanged<dynamic>? onPointerDown;
 
   /// The color to use when painting the line.
   final Color? borderColor;
@@ -66,6 +75,7 @@ class GridButton extends StatefulWidget {
       required this.items,
       required this.onPressed,
       this.onTapDown,
+      this.onPointerDown,
       this.borderColor,
       this.textStyle,
       this.textDirection,
@@ -100,40 +110,48 @@ class _GridButtonState extends State<GridButton> {
         child: Material(
           color: item.color ?? Colors.transparent,
           borderRadius: BorderRadius.circular(item.borderRadius),
-          child: InkWell(
-            key: item.key,
-            focusNode: item.focusNode,
-            borderRadius: BorderRadius.circular(item.borderRadius),
-            onTapDown: (widget.enabled == true && widget.onTapDown != null)
-                ? (details) {
-                    widget.onTapDown!(item.value ?? item.title);
-                  }
-                : null,
-            onTap: (widget.enabled == true)
-                ? () {
-                    widget.onPressed(item.value ?? item.title);
-                  }
-                : null,
-            onLongPress: (widget.enabled == true)
-                ? () {
-                    var result = item.longPressValue ?? item.value;
-                    widget.onPressed(result ?? item.title);
-                  }
-                : null,
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                border: item.shape != null
-                    ? Border.fromBorderSide(item.shape!)
+          child: Listener(
+            onPointerDown:
+                (widget.enabled == true && widget.onPointerDown != null)
+                    ? (event) {
+                        widget.onPointerDown!(item.value ?? item.title);
+                      }
                     : null,
-                borderRadius: BorderRadius.circular(item.borderRadius),
+            child: InkWell(
+              key: item.key,
+              focusNode: item.focusNode,
+              borderRadius: BorderRadius.circular(item.borderRadius),
+              onTapDown: (widget.enabled == true && widget.onTapDown != null)
+                  ? (details) {
+                      widget.onTapDown!(item.value ?? item.title);
+                    }
+                  : null,
+              onTap: (widget.enabled == true)
+                  ? () {
+                      widget.onPressed(item.value ?? item.title);
+                    }
+                  : null,
+              onLongPress: (widget.enabled == true)
+                  ? () {
+                      var result = item.longPressValue ?? item.value;
+                      widget.onPressed(result ?? item.title);
+                    }
+                  : null,
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  border: item.shape != null
+                      ? Border.fromBorderSide(item.shape!)
+                      : null,
+                  borderRadius: BorderRadius.circular(item.borderRadius),
+                ),
+                child: item.child == null
+                    ? Text(
+                        item.title!,
+                        style: textStyle,
+                      )
+                    : item.child!,
               ),
-              child: item.child == null
-                  ? Text(
-                      item.title!,
-                      style: textStyle,
-                    )
-                  : item.child!,
             ),
           ),
         ),

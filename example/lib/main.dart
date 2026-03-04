@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
               textStyle: textStyle,
               borderColor: Colors.grey[300],
               borderWidth: 2,
+              onPointerDown: (value) {
+                debugPrint("onPointerDown: $value");
+              },
               onTapDown: (value) {
                 debugPrint("onTapDown: $value");
               },

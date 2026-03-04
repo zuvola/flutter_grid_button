@@ -1,3 +1,6 @@
+## [2.3.0]
+- Added `GridButton.onPointerDown` callback.
+
 ## [2.2.0]
 - Added `GridButton.onTapDown` callback.
 
